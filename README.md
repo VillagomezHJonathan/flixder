@@ -27,8 +27,6 @@
 
 ### **_Getting Started_**
 
-#### Choose your favorite genres then use the app to find new movies to watch!
-
 ---
 
 ### **_Screenshots_**
