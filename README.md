@@ -27,6 +27,14 @@
 
 ### **_Getting Started_**
 
+#### Component Hierarchy Diagram
+
+![Image](/project-info/ch-diagram.svg)
+
+#### Full Entity Relationship Diagram
+
+![Image](/project-info/erd.svg)
+
 ---
 
 ### **_Screenshots_**
