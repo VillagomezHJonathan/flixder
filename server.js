@@ -2,6 +2,7 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 const express = require('express')
+const cors = require('cors')
 const db = require('./db')
 const genresRoutes = require('./routes/genres')
 const regionsRoutes = require('./routes/regions')
@@ -11,6 +12,7 @@ const PORT = process.env.PORT || 3001
 
 const app = express()
 
+app.use(cors())
 app.use(express.json())
 
 app.use('/genres', genresRoutes)
