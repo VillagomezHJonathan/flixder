@@ -8,6 +8,10 @@ function App() {
   const [profiles, setProfiles] = useState([])
   const [currentProfile, setCurrentProfile] = useState({})
 
+  const profileSwitcher = (profile) => {
+    setCurrentProfile(profile)
+  }
+
   useEffect(() => {
     const getProfiles = async () => {
       const res = await axios.get('http://localhost:3001/profiles')
@@ -17,11 +21,15 @@ function App() {
     }
 
     getProfiles()
-  })
+  }, [])
 
   return (
     <div className="App">
-      <NavBar currentProfile={currentProfile} profiles={profiles} />
+      <NavBar
+        currentProfile={currentProfile}
+        profiles={profiles}
+        profileSwitcher={profileSwitcher}
+      />
       <Profile currentProfile={currentProfile} />
     </div>
   )

@@ -16,7 +16,12 @@ const NavBar = (props) => {
           {profiles.map(
             (profile) =>
               profile._id !== currentProfile._id && (
-                <div key={profile._id}>
+                <div
+                  key={profile._id}
+                  onClick={() => {
+                    props.profileSwitcher(profile)
+                  }}
+                >
                   <img
                     src={profile.profile_pic}
                     alt={`${profile.name} profile`}
