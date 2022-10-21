@@ -1,6 +1,6 @@
 const { Router } = require('express')
 const router = Router()
-const controller = require('../controllers/genreController')
+const controller = require('../controllers/genresController')
 
 router.get('/', controller.getAllGenres)
 
