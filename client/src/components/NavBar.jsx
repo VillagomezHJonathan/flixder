@@ -29,8 +29,8 @@ const NavBar = (props) => {
                 <div
                   key={profile._id}
                   className="profile"
-                  onClick={() => {
-                    props.handleSwitch(profile)
+                  onClick={(evt) => {
+                    props.handleSwitch(evt, profile)
                   }}
                 >
                   <img

@@ -9,6 +9,10 @@
   background-color: gray;
 }
 
+.NavBar .profile {
+  transition: all 0.2s ease;
+}
+
 .NavBar .others.show .profile,
 .NavBar .profile {
   width: 75px;

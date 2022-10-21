@@ -8,7 +8,10 @@ function App() {
   const [profiles, setProfiles] = useState([])
   const [currentProfile, setCurrentProfile] = useState({})
 
-  const handleSwitch = (profile) => {
+  const handleSwitch = (evt, profile) => {
+    const parent = evt.currentTarget.parentNode
+
+    parent.classList.toggle('show')
     setCurrentProfile(profile)
   }
 
