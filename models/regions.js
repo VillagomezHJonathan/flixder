@@ -1,6 +1,6 @@
 const { Schema } = require('mongoose')
 
-const Region = new Schema(
+const regionSchema = new Schema(
   {
     tmdb_iso: { type: String, required: true },
     name: { type: String, required: true }
@@ -8,4 +8,4 @@ const Region = new Schema(
   { timestamps: true }
 )
 
-module.exports = Region
+module.exports = regionSchema

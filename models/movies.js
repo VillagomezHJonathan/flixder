@@ -1,6 +1,6 @@
 const { Schema } = require('mongoose')
 
-const Movie = new Schema(
+const movieSchema = new Schema(
   {
     tmdb_id: { type: Number, required: true },
     poster_path: { type: String, required: true },
@@ -15,4 +15,4 @@ const Movie = new Schema(
   { timestamps: true }
 )
 
-module.exports = Movie
+module.exports = movieSchema

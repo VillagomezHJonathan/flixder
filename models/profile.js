@@ -1,6 +1,6 @@
 const { Schema } = require('mongoose')
 
-const Profile = new Schema(
+const profileSchema = new Schema(
   {
     name: { type: String, required: true },
     profile_pic: { type: String, required: true },
@@ -10,4 +10,4 @@ const Profile = new Schema(
   { timestamps: true }
 )
 
-module.exports = Profile
+module.exports = profileSchema

@@ -1,6 +1,6 @@
 const { Schema } = require('mongoose')
 
-const Genre = new Schema(
+const genreSchema = new Schema(
   {
     tmdb_id: { type: Number, required: true },
     name: { type: String, required: true }
@@ -8,4 +8,4 @@ const Genre = new Schema(
   { timestamps: true }
 )
 
-module.exports = Genre
+module.exports = genreSchema
