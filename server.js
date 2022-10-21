@@ -4,13 +4,17 @@ if (process.env.NODE_ENV !== 'production') {
 const express = require('express')
 const db = require('./db')
 const genresRoutes = require('./routes/genres')
-const regionRoutes = require('./routes/regions')
+const regionsRoutes = require('./routes/regions')
+const profilesRoutes = require('./routes/profiles')
 const PORT = process.env.PORT || 3001
 
 const app = express()
 
+app.use(express.json())
+
 app.use('/genres', genresRoutes)
-app.use('/regions', regionRoutes)
+app.use('/regions', regionsRoutes)
+app.use('/profiles', profilesRoutes)
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`)
