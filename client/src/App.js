@@ -8,7 +8,7 @@ function App() {
   const [profiles, setProfiles] = useState([])
   const [currentProfile, setCurrentProfile] = useState({})
 
-  const profileSwitcher = (profile) => {
+  const handleSwitch = (profile) => {
     setCurrentProfile(profile)
   }
 
@@ -28,7 +28,7 @@ function App() {
       <NavBar
         currentProfile={currentProfile}
         profiles={profiles}
-        profileSwitcher={profileSwitcher}
+        handleSwitch={handleSwitch}
       />
       <Profile currentProfile={currentProfile} />
     </div>

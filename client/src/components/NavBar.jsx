@@ -1,25 +1,36 @@
 const NavBar = (props) => {
-  const { profiles, currentProfile } = props
+  const showProfiles = (evt) => {
+    const parent = evt.currentTarget.parentNode
+    const others = parent.querySelector('.others')
+
+    others.classList.toggle('show')
+  }
 
   return (
     <nav className="NavBar">
       <p>Flixder</p>
       <div className="profile-selector">
-        <div className="current">
+        <div
+          className="current profile"
+          onClick={(evt) => {
+            showProfiles(evt)
+          }}
+        >
           <img
-            src={currentProfile.profile_pic}
-            alt={`${currentProfile.name} profile`}
+            src={props.currentProfile.profile_pic}
+            alt={`${props.currentProfile.name} profile`}
           />
         </div>
 
         <div className="others">
-          {profiles.map(
+          {props.profiles.map(
             (profile) =>
-              profile._id !== currentProfile._id && (
+              profile._id !== props.currentProfile._id && (
                 <div
                   key={profile._id}
+                  className="profile"
                   onClick={() => {
-                    props.profileSwitcher(profile)
+                    props.handleSwitch(profile)
                   }}
                 >
                   <img
