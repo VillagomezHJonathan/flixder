@@ -12,7 +12,8 @@ function App() {
     const getProfiles = async () => {
       const res = await axios.get('http://localhost:3001/profiles')
 
-      console.log(res)
+      setProfiles(res.data.profiles)
+      setCurrentProfile(profiles[0])
     }
 
     getProfiles()
@@ -21,7 +22,7 @@ function App() {
   return (
     <div className="App">
       <NavBar />
-      <Profile />
+      <Profile currentProfile={currentProfile} />
     </div>
   )
 }
