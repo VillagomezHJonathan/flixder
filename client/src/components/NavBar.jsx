@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom'
 
 const NavBar = (props) => {
-  const showProfiles = (evt) => {
-    const parent = evt.currentTarget.parentNode
-    const others = parent.querySelector('.drop-down')
+  const toggleDropDown = () => {
+    const dropDown = document.querySelector('.drop-down')
 
-    others.classList.toggle('show')
+    dropDown.classList.toggle('show')
   }
 
   return (
@@ -14,8 +13,8 @@ const NavBar = (props) => {
       <div className="profile-selector">
         <div
           className="current profile"
-          onClick={(evt) => {
-            showProfiles(evt)
+          onClick={() => {
+            toggleDropDown()
           }}
         >
           <img
@@ -32,6 +31,7 @@ const NavBar = (props) => {
                   key={profile._id}
                   className="profile"
                   onClick={() => {
+                    toggleDropDown()
                     props.updateCurrentProfile(profile._id)
                   }}
                 >

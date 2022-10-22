@@ -33,7 +33,6 @@ function App() {
 
     getProfiles()
     getCurrentProfile()
-    console.log('hi')
   }, [currentProfileId])
 
   return (
