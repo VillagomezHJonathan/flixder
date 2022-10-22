@@ -4,12 +4,11 @@ import axios from 'axios'
 
 const NavBar = (props) => {
   const [profiles, setProfiles] = useState([])
-  const [currentProfile, setCurrentProfile] = useState({})
+
   let navigate = useNavigate()
 
   const toggleDropDown = () => {
     const dropDown = document.querySelector('.drop-down')
-
     dropDown.classList.toggle('show')
   }
 
@@ -20,17 +19,8 @@ const NavBar = (props) => {
       setProfiles(res.data.profiles)
     }
 
-    const getCurrentProfile = async () => {
-      const res = await axios.get(
-        `http://localhost:3001/profiles/${props.currentProfileId}`
-      )
-
-      setCurrentProfile(res.data.profile)
-    }
-
     getProfiles()
-    getCurrentProfile()
-  }, [props.currentProfileId])
+  }, [])
 
   return (
     <nav className="NavBar">
@@ -43,15 +33,15 @@ const NavBar = (props) => {
           }}
         >
           <img
-            src={currentProfile.profile_pic}
-            alt={`${currentProfile.name} profile`}
+            src={props.currentProfile.profile_pic}
+            alt={`${props.currentProfile.name} profile`}
           />
         </div>
 
         <div className="drop-down">
           {profiles.map(
             (profile) =>
-              profile._id !== currentProfile._id && (
+              profile._id !== props.currentProfile._id && (
                 <div
                   key={profile._id}
                   className="profile"
@@ -69,7 +59,7 @@ const NavBar = (props) => {
               )
           )}
 
-          <Link className="link" to={`/profiles/${currentProfile._id}`}>
+          <Link className="link" to={`/profiles/${props.currentProfile._id}`}>
             View Profile
           </Link>
         </div>

@@ -4,8 +4,10 @@ import { Routes, Route } from 'react-router-dom'
 import axios from 'axios'
 import NavBar from './components/NavBar'
 import Profile from './components/Profile'
+import Home from './components/Home'
 
 function App() {
+  const [currentProfile, setCurrentProfile] = useState({})
   const [currentProfileId, setCurrentProfileId] = useState(
     '635305b6c1b00ed227436b1c'
   )
@@ -14,17 +16,31 @@ function App() {
     setCurrentProfileId(id)
   }
 
+  useEffect(() => {
+    const getCurrentProfile = async () => {
+      const res = await axios.get(
+        `http://localhost:3001/profiles/${currentProfileId}`
+      )
+
+      setCurrentProfile(res.data.profile)
+    }
+
+    getCurrentProfile()
+  }, [currentProfileId])
+
   return (
     <div className="App">
       <NavBar
-        currentProfileId={currentProfileId}
+        currentProfile={currentProfile}
         updateCurrentProfile={updateCurrentProfile}
       />
       <main>
         <Routes>
+          <Route path="/" element={<Home currentProfile={currentProfile} />} />
+
           <Route
             path="/profiles/:id"
-            element={<Profile currentProfileId={currentProfileId} />}
+            element={<Profile currentProfile={currentProfile} />}
           />
         </Routes>
       </main>
