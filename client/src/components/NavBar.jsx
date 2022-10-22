@@ -1,7 +1,9 @@
+import { Link } from 'react-router-dom'
+
 const NavBar = (props) => {
   const showProfiles = (evt) => {
     const parent = evt.currentTarget.parentNode
-    const others = parent.querySelector('.others')
+    const others = parent.querySelector('.drop-down')
 
     others.classList.toggle('show')
   }
@@ -22,15 +24,15 @@ const NavBar = (props) => {
           />
         </div>
 
-        <div className="others">
+        <div className="drop-down">
           {props.profiles.map(
             (profile) =>
               profile._id !== props.currentProfile._id && (
                 <div
                   key={profile._id}
                   className="profile"
-                  onClick={(evt) => {
-                    props.handleSwitch(evt, profile)
+                  onClick={() => {
+                    props.updateCurrentProfile(profile._id)
                   }}
                 >
                   <img
@@ -40,6 +42,7 @@ const NavBar = (props) => {
                 </div>
               )
           )}
+          <Link to={`/profiles/${props.currentProfile._id}`}>View Profile</Link>
         </div>
       </div>
     </nav>

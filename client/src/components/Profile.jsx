@@ -1,13 +1,11 @@
 const Profile = (props) => {
-  const { currentProfile } = props
-
   return (
     <div className="Profile">
       <h1>Profile</h1>
-      <h2>{currentProfile.name}</h2>
+      <h2>{props.currentProfile.name}</h2>
       <img
-        src={currentProfile.profile_pic}
-        alt={`${currentProfile.name} profile`}
+        src={props.currentProfile.profile_pic}
+        alt={`${props.currentProfile.name} profile`}
       />
     </div>
   )

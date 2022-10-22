@@ -8,12 +8,12 @@ import Profile from './components/Profile'
 function App() {
   const [profiles, setProfiles] = useState([])
   const [currentProfile, setCurrentProfile] = useState({})
+  const [currentProfileId, setCurrentProfileId] = useState(
+    '635305b6c1b00ed227436b1c'
+  )
 
-  const handleSwitch = (evt, profile) => {
-    const parent = evt.currentTarget.parentNode
-
-    parent.classList.toggle('show')
-    setCurrentProfile(profile)
+  const updateCurrentProfile = (id) => {
+    setCurrentProfileId(id)
   }
 
   useEffect(() => {
@@ -21,18 +21,27 @@ function App() {
       const res = await axios.get('http://localhost:3001/profiles')
 
       setProfiles(res.data.profiles)
-      setCurrentProfile(res.data.profiles[0])
+    }
+
+    const getCurrentProfile = async () => {
+      const res = await axios.get(
+        `http://localhost:3001/profiles/${currentProfileId}`
+      )
+
+      setCurrentProfile(res.data.profile)
     }
 
     getProfiles()
-  }, [])
+    getCurrentProfile()
+    console.log('hi')
+  }, [currentProfileId])
 
   return (
     <div className="App">
       <NavBar
-        currentProfile={currentProfile}
         profiles={profiles}
-        handleSwitch={handleSwitch}
+        currentProfile={currentProfile}
+        updateCurrentProfile={updateCurrentProfile}
       />
       <main>
         <Routes>
