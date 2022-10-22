@@ -8,6 +8,7 @@ const Home = (props) => {
           src={props.currentProfile.profile_pic}
           alt={`${props.currentProfile.name} profile`}
         />
+        <div className="profile-info"></div>
       </div>
     </div>
   )
