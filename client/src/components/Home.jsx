@@ -1,10 +1,14 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
+import './Home.css'
 
 const Home = (props) => {
   return (
     <div className="Home">
-      <h1>Home</h1>
+      <div className="profile-card">
+        <img
+          src={props.currentProfile.profile_pic}
+          alt={`${props.currentProfile.name} profile`}
+        />
+      </div>
     </div>
   )
 }
