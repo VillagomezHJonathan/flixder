@@ -6,8 +6,6 @@ import NavBar from './components/NavBar'
 import Profile from './components/Profile'
 
 function App() {
-  const [profiles, setProfiles] = useState([])
-  const [currentProfile, setCurrentProfile] = useState({})
   const [currentProfileId, setCurrentProfileId] = useState(
     '635305b6c1b00ed227436b1c'
   )
@@ -16,37 +14,17 @@ function App() {
     setCurrentProfileId(id)
   }
 
-  useEffect(() => {
-    const getProfiles = async () => {
-      const res = await axios.get('http://localhost:3001/profiles')
-
-      setProfiles(res.data.profiles)
-    }
-
-    const getCurrentProfile = async () => {
-      const res = await axios.get(
-        `http://localhost:3001/profiles/${currentProfileId}`
-      )
-
-      setCurrentProfile(res.data.profile)
-    }
-
-    getProfiles()
-    getCurrentProfile()
-  }, [currentProfileId])
-
   return (
     <div className="App">
       <NavBar
-        profiles={profiles}
-        currentProfile={currentProfile}
+        currentProfileId={currentProfileId}
         updateCurrentProfile={updateCurrentProfile}
       />
       <main>
         <Routes>
           <Route
             path="/profiles/:id"
-            element={<Profile currentProfile={currentProfile} />}
+            element={<Profile currentProfileId={currentProfileId} />}
           />
         </Routes>
       </main>

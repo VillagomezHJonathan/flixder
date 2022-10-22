@@ -3,14 +3,30 @@
 }
 
 .NavBar {
-  padding: 2rem;
+  padding: 2rem 5rem;
   display: flex;
   justify-content: space-between;
-  background-color: gray;
+  background-color: slategrey;
 }
 
-.NavBar .profile {
+.NavBar .profile-selector .drop-down {
+  margin-top: 1rem;
+}
+
+.NavBar .profile-selector,
+.NavBar .profile-selector .drop-down {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.NavBar .profile,
+.NavBar .link {
   transition: all 0.2s ease;
+}
+
+.NavBar .drop-down.show .link {
+  font-size: initial;
 }
 
 .NavBar .drop-down.show .profile,
@@ -37,6 +53,10 @@
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
+}
+
+.NavBar .link {
+  font-size: 0;
 }
 
 .NavBar .drop-down .profile {

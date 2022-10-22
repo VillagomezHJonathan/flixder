@@ -1,11 +1,36 @@
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const NavBar = (props) => {
+  const [profiles, setProfiles] = useState([])
+  const [currentProfile, setCurrentProfile] = useState({})
+  let navigate = useNavigate()
+
   const toggleDropDown = () => {
     const dropDown = document.querySelector('.drop-down')
 
     dropDown.classList.toggle('show')
   }
+
+  useEffect(() => {
+    const getProfiles = async () => {
+      const res = await axios.get('http://localhost:3001/profiles')
+
+      setProfiles(res.data.profiles)
+    }
+
+    const getCurrentProfile = async () => {
+      const res = await axios.get(
+        `http://localhost:3001/profiles/${props.currentProfileId}`
+      )
+
+      setCurrentProfile(res.data.profile)
+    }
+
+    getProfiles()
+    getCurrentProfile()
+  }, [props.currentProfileId])
 
   return (
     <nav className="NavBar">
@@ -18,20 +43,21 @@ const NavBar = (props) => {
           }}
         >
           <img
-            src={props.currentProfile.profile_pic}
-            alt={`${props.currentProfile.name} profile`}
+            src={currentProfile.profile_pic}
+            alt={`${currentProfile.name} profile`}
           />
         </div>
 
         <div className="drop-down">
-          {props.profiles.map(
+          {profiles.map(
             (profile) =>
-              profile._id !== props.currentProfile._id && (
+              profile._id !== currentProfile._id && (
                 <div
                   key={profile._id}
                   className="profile"
                   onClick={() => {
                     toggleDropDown()
+                    navigate('/')
                     props.updateCurrentProfile(profile._id)
                   }}
                 >
@@ -42,7 +68,10 @@ const NavBar = (props) => {
                 </div>
               )
           )}
-          <Link to={`/profiles/${props.currentProfile._id}`}>View Profile</Link>
+
+          <Link className="link" to={`/profiles/${currentProfile._id}`}>
+            View Profile
+          </Link>
         </div>
       </div>
     </nav>
