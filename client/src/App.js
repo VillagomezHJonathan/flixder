@@ -1,5 +1,6 @@
 import './App.css'
 import { useState, useEffect } from 'react'
+import { Routes, Route } from 'react-router-dom'
 import axios from 'axios'
 import NavBar from './components/NavBar'
 import Profile from './components/Profile'
@@ -33,7 +34,14 @@ function App() {
         profiles={profiles}
         handleSwitch={handleSwitch}
       />
-      <Profile currentProfile={currentProfile} />
+      <main>
+        <Routes>
+          <Route
+            path="/profiles/:id"
+            element={<Profile currentProfile={currentProfile} />}
+          />
+        </Routes>
+      </main>
     </div>
   )
 }

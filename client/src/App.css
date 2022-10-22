@@ -18,7 +18,11 @@
   width: 75px;
   height: 75px;
   max-height: 75px;
-  margin-bottom: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.NavBar .current.profile {
+  margin-top: 0;
 }
 
 .NavBar img {
@@ -38,7 +42,7 @@
 .NavBar .others .profile {
   max-height: 0;
   height: 0;
-  margin-bottom: 0;
+  margin-top: 0;
 }
 
 .Profile img {
