@@ -7,11 +7,36 @@ const NewProfile = () => {
   const [providers, setProviders] = useState([])
   const [images, setImages] = useState([])
   const [genres, setGenres] = useState([])
-  const [reqBody, setReqBody] = useState({})
+  const [reqBody, setReqBody] = useState({
+    name: '',
+    profile_pic: '',
+    region: '6352c64f9879eee933e71121',
+    providers: [],
+    fav_genre_ids: [],
+    fav_movie_ids: []
+  })
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault()
+  }
 
   const handleChange = (evt) => {
-    const target = evt.target.id
-    console.log(target)
+    const target = evt.target
+
+    setReqBody({ ...reqBody, [target.id]: target.value })
+  }
+
+  const handleCheckbox = (evt) => {
+    const target = evt.target
+    const arr = [...reqBody.providers]
+
+    if (target.checked) {
+      arr.push(target.id)
+      setReqBody({ ...reqBody, providers: [...arr] })
+    } else {
+      const filtered = arr.filter((provider) => provider !== target.id)
+      setReqBody({ ...reqBody, providers: [...filtered] })
+    }
   }
 
   useEffect(() => {
@@ -33,7 +58,7 @@ const NewProfile = () => {
   return (
     <div className="NewProfile">
       <h1>Create A New Profile</h1>
-      <form>
+      <form onSubmit={(evt) => handleSubmit(evt)}>
         <label htmlFor="name">Name</label>
         <input
           onChange={(evt) => handleChange(evt)}
@@ -41,6 +66,7 @@ const NewProfile = () => {
           id="name"
           name="name"
           placeholder="Profile name"
+          value={reqBody.name}
           required
         />
 
@@ -49,7 +75,7 @@ const NewProfile = () => {
           onChange={(evt) => handleChange(evt)}
           name="region"
           id="region"
-          defaultValue="default"
+          value={reqBody.region}
           required
         >
           <option value="default" disabled>
@@ -61,6 +87,22 @@ const NewProfile = () => {
             </option>
           ))}
         </select>
+
+        <div>
+          <p>Watch Providers</p>
+          {providers.map((provider) => (
+            <div key={provider._id}>
+              <input
+                type="checkbox"
+                id={provider._id}
+                name={provider._id}
+                onChange={(evt) => handleCheckbox(evt)}
+              />
+
+              <label htmlFor={provider._id}>{provider.provider_name}</label>
+            </div>
+          ))}
+        </div>
 
         <button type="submit">Create</button>
       </form>
