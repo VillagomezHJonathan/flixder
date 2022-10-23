@@ -7,6 +7,12 @@ const NewProfile = () => {
   const [providers, setProviders] = useState([])
   const [images, setImages] = useState([])
   const [genres, setGenres] = useState([])
+  const [reqBody, setReqBody] = useState({})
+
+  const handleChange = (evt) => {
+    const target = evt.target.id
+    console.log(target)
+  }
 
   useEffect(() => {
     const getData = async () => {
@@ -30,12 +36,33 @@ const NewProfile = () => {
       <form>
         <label htmlFor="name">Name</label>
         <input
+          onChange={(evt) => handleChange(evt)}
           type="text"
           id="name"
           name="name"
           placeholder="Profile name"
           required
         />
+
+        <label htmlFor="region">Choose a region:</label>
+        <select
+          onChange={(evt) => handleChange(evt)}
+          name="region"
+          id="region"
+          defaultValue="default"
+          required
+        >
+          <option value="default" disabled>
+            Choose your region
+          </option>
+          {regions.map((region) => (
+            <option key={region._id} value={region._id}>
+              {region.name}
+            </option>
+          ))}
+        </select>
+
+        <button type="submit">Create</button>
       </form>
     </div>
   )
