@@ -8,6 +8,7 @@ import Home from './components/Home'
 import NewProfile from './components/NewProfile'
 
 function App() {
+  const [currentProfile, setCurrentProfile] = useState({})
   const [currentProfileId, setCurrentProfileId] = useState(
     '6354e306131e244d9d270a65'
   )
@@ -20,6 +21,18 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    const getProfile = async () => {
+      const res = await axios.get(
+        `http://localhost:3001/profiles/${currentProfileId}`
+      )
+
+      setCurrentProfile(res.data.profile)
+    }
+
+    getProfile()
+  }, [currentProfileId])
+
   return (
     <div className="App">
       <NavBar
@@ -28,14 +41,11 @@ function App() {
       />
       <main>
         <Routes>
-          <Route
-            path="/"
-            element={<Home currentProfileId={currentProfileId} />}
-          />
+          <Route path="/" element={<Home currentProfile={currentProfile} />} />
 
           <Route
             path="/profiles/:id"
-            element={<Profile currentProfileId={currentProfileId} />}
+            element={<Profile currentProfile={currentProfile} />}
           />
 
           <Route

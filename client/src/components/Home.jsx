@@ -1,34 +1,22 @@
 import './Home.css'
-import { useState, useEffect } from 'react'
-import axios from 'axios'
 
 const Home = (props) => {
-  const [currentProfile, setCurrentProfile] = useState({})
-
-  useEffect(() => {
-    const getProfile = async () => {
-      const res = await axios.get(
-        `http://localhost:3001/profiles/${props.currentProfileId}`
-      )
-
-      setCurrentProfile(res.data.profile)
-    }
-
-    getProfile()
-  }, [props.currentProfileId])
+  const profile = props.currentProfile
 
   return (
     <div className="Home">
       <div className="profile-card">
         <img
           className="profile-pic"
-          src={currentProfile.profile_pic}
-          alt={`${currentProfile.name} profile`}
+          src={profile.profile_pic}
+          alt={`${profile.name} profile`}
         />
         <div className="profile-info">
-          {/* <div className="region">
-            <img src={profile.region.flag_image} alt={profile.region.name} />
-          </div> */}
+          <div className="region">
+            {profile.region && (
+              <img src={profile.region.flag_image} alt={profile.region.name} />
+            )}
+          </div>
         </div>
       </div>
     </div>
