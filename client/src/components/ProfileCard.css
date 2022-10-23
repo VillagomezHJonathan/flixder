@@ -1,0 +1,25 @@
+.ProfileCard {
+  max-width: 750px;
+  display: flex;
+  padding: 2rem;
+  background-color: silver;
+}
+
+.ProfileCard,
+.ProfileCard .profile-pic {
+  border-radius: 2rem;
+}
+
+.ProfileCard .profile-pic {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.ProfileCard .region-img {
+  width: 75px;
+  border-radius: 0.5rem;
+  object-fit: contain;
+  object-position: center;
+}

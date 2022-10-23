@@ -1,0 +1,10 @@
+.GenreCard {
+  border-radius: 1rem;
+  background-color: gray;
+}
+
+.GenreCard img {
+  width: 25px;
+  object-fit: cover;
+  object-position: center;
+}
