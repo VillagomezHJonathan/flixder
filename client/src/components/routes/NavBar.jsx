@@ -25,7 +25,7 @@ const NavBar = (props) => {
 
   return (
     <nav className="NavBar">
-      <p>Flixder</p>
+      <Link to="/">Flixder</Link>
       <div className="profile-selector">
         <div
           className="current profile"
