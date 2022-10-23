@@ -9,6 +9,7 @@ const regionsRoutes = require('./routes/regions')
 const profilesRoutes = require('./routes/profiles')
 const moviesRoutes = require('./routes/movies')
 const imagesRoutes = require('./routes/images')
+const providersRoutes = require('./routes/providers')
 const PORT = process.env.PORT || 3001
 
 const app = express()
@@ -21,6 +22,7 @@ app.use('/regions', regionsRoutes)
 app.use('/profiles', profilesRoutes)
 app.use('/movies', moviesRoutes)
 app.use('/images', imagesRoutes)
+app.use('/providers', providersRoutes)
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`)

@@ -2,6 +2,9 @@ import './NewProfile.css'
 import { useState, useEffect } from 'react'
 
 const NewProfile = () => {
+  const [images, setImages] = useState([])
+  const [genres, setGenres] = useState([])
+
   return (
     <div className="NewProfile">
       <h1>Create A New Profile</h1>
