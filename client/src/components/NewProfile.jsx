@@ -1,8 +1,9 @@
 import './NewProfile.css'
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-const NewProfile = () => {
+const NewProfile = (props) => {
   const [regions, setRegions] = useState([])
   const [providers, setProviders] = useState([])
   const [images, setImages] = useState([])
@@ -15,20 +16,41 @@ const NewProfile = () => {
     fav_genre_ids: [],
     fav_movie_ids: []
   })
+  let navigate = useNavigate()
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault()
+
+    const newProfile = await axios.post(
+      'http://localhost:3001/profiles',
+      reqBody
+    )
+
+    setReqBody({
+      name: '',
+      profile_pic: '',
+      region: '6352c64f9879eee933e71121',
+      providers: [],
+      fav_genre_ids: [],
+      fav_movie_ids: []
+    })
+
+    props.updateCurrentProfile(newProfile.data._id, true)
   }
 
-  const handleChange = (evt) => {
+  const handleChange = (evt, reqKey) => {
     const target = evt.target
 
-    setReqBody({ ...reqBody, [target.id]: target.value })
+    if (reqKey) {
+      setReqBody({ ...reqBody, [reqKey]: target.value })
+    } else {
+      setReqBody({ ...reqBody, [target.id]: target.value })
+    }
   }
 
   const handleCheckbox = (evt, reqKey) => {
     const target = evt.target
-    const arr = [...reqBody.reqKey]
+    const arr = [...reqBody[reqKey]]
 
     if (target.checked) {
       arr.push(target.id)
@@ -53,12 +75,35 @@ const NewProfile = () => {
     }
 
     getData()
-  }, [])
+  }, [reqBody])
 
   return (
     <div className="NewProfile">
       <h1>Create A New Profile</h1>
       <form onSubmit={(evt) => handleSubmit(evt)}>
+        <div>
+          <h2>Choose A Profile Pic</h2>
+
+          {images.map((image) => (
+            <div key={image._id}>
+              <input
+                type="radio"
+                id={image._id}
+                name="profile_pic"
+                value={image.url}
+                onChange={(evt) => handleChange(evt, 'profile_pic')}
+              />
+              <label htmlFor={image._id}>
+                <img
+                  className="profile-pic"
+                  src={image.url}
+                  alt={`${image.title}`}
+                />
+              </label>
+            </div>
+          ))}
+        </div>
+
         <label htmlFor="name">Name</label>
         <input
           onChange={(evt) => handleChange(evt)}
@@ -89,14 +134,14 @@ const NewProfile = () => {
         </select>
 
         <div>
-          <p>Watch Providers</p>
+          <h2>Watch Providers</h2>
           {providers.map((provider) => (
             <div key={provider._id}>
               <input
                 type="checkbox"
                 id={provider._id}
                 name={provider._id}
-                onChange={(evt) => handleCheckbox(evt)}
+                onChange={(evt) => handleCheckbox(evt, 'providers')}
               />
 
               <label htmlFor={provider._id}>{provider.provider_name}</label>
@@ -104,6 +149,21 @@ const NewProfile = () => {
           ))}
         </div>
 
+        <div>
+          <h2>Favorite Genres</h2>
+          {genres.map((genre) => (
+            <div key={genre._id}>
+              <input
+                type="checkbox"
+                id={genre._id}
+                name={genre._id}
+                onChange={(evt) => handleCheckbox(evt, 'fav_genre_ids')}
+              />
+
+              <label htmlFor={genre._id}>{genre.name}</label>
+            </div>
+          ))}
+        </div>
         <button type="submit">Create</button>
       </form>
     </div>

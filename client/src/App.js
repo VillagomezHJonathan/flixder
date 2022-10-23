@@ -1,6 +1,6 @@
 import './App.css'
 import { useState, useEffect } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import NavBar from './components/NavBar'
 import Profile from './components/Profile'
@@ -10,11 +10,15 @@ import NewProfile from './components/NewProfile'
 function App() {
   const [currentProfile, setCurrentProfile] = useState({})
   const [currentProfileId, setCurrentProfileId] = useState(
-    '635305b6c1b00ed227436b1c'
+    '6354e306131e244d9d270a65'
   )
+  let navigate = useNavigate()
 
-  const updateCurrentProfile = (id) => {
+  const updateCurrentProfile = (id, redirect) => {
     setCurrentProfileId(id)
+    if (redirect) {
+      navigate(`/profiles/${id}`)
+    }
   }
 
   useEffect(() => {
@@ -44,7 +48,10 @@ function App() {
             element={<Profile currentProfile={currentProfile} />}
           />
 
-          <Route path="/profiles/new" element={<NewProfile />} />
+          <Route
+            path="/profiles/new"
+            element={<NewProfile updateCurrentProfile={updateCurrentProfile} />}
+          />
         </Routes>
       </main>
     </div>
