@@ -1,4 +1,5 @@
 import './NewProfile.css'
+import { useState, useEffect } from 'react'
 
 const NewProfile = () => {
   return (
