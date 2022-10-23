@@ -60,8 +60,16 @@ const NavBar = (props) => {
               )
           )}
 
-          <Link className="link" to={`/profiles/${props.currentProfile._id}`}>
+          <Link
+            onClick={toggleDropDown}
+            className="link"
+            to={`/profiles/${props.currentProfile._id}`}
+          >
             View Profile
+          </Link>
+
+          <Link onClick={toggleDropDown} className="link" to={'/profiles/new'}>
+            New Profile
           </Link>
         </div>
       </div>
