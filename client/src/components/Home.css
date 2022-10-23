@@ -1,12 +1,12 @@
 .Home .profile-card {
-  max-width: 500px;
+  max-width: 750px;
   display: flex;
   padding: 2rem;
   background-color: silver;
 }
 
 .Home .profile-card,
-.Home .profile-card img {
+.Home .profile-card .profile-pic {
   border-radius: 2rem;
 }
 
@@ -18,8 +18,8 @@
 }
 
 .Home .region-img {
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
+  width: 75px;
+  border-radius: 0.5rem;
+  object-fit: contain;
   object-position: center;
 }
