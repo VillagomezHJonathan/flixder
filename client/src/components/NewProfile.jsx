@@ -26,16 +26,16 @@ const NewProfile = () => {
     setReqBody({ ...reqBody, [target.id]: target.value })
   }
 
-  const handleCheckbox = (evt) => {
+  const handleCheckbox = (evt, reqKey) => {
     const target = evt.target
-    const arr = [...reqBody.providers]
+    const arr = [...reqBody.reqKey]
 
     if (target.checked) {
       arr.push(target.id)
-      setReqBody({ ...reqBody, providers: [...arr] })
+      setReqBody({ ...reqBody, [reqKey]: [...arr] })
     } else {
       const filtered = arr.filter((provider) => provider !== target.id)
-      setReqBody({ ...reqBody, providers: [...filtered] })
+      setReqBody({ ...reqBody, [reqKey]: [...filtered] })
     }
   }
 
