@@ -48,3 +48,9 @@
 ---
 
 ### **_Credits_**
+
+#### Movie Api: [TMDB](https://developers.themoviedb.org/3/getting-started/introduction)
+
+#### Images: [Unsplash](https://unsplash.com/)
+
+#### Country Flags: [Flagpedia](https://flagpedia.net/index)
