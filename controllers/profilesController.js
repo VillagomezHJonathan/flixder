@@ -16,6 +16,9 @@ const getProfileById = async (req, res) => {
   try {
     const { id } = req.params
     const profile = await Profile.findOne({ _id: id })
+      .populate('region')
+      .populate('providers')
+      .populate('fav_genre_ids')
 
     return res.status(201).json({ profile })
   } catch (err) {

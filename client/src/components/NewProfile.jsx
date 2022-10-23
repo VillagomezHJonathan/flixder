@@ -1,6 +1,5 @@
 import './NewProfile.css'
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const NewProfile = (props) => {
@@ -16,7 +15,6 @@ const NewProfile = (props) => {
     fav_genre_ids: [],
     fav_movie_ids: []
   })
-  let navigate = useNavigate()
 
   const handleSubmit = async (evt) => {
     evt.preventDefault()

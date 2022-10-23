@@ -10,9 +10,16 @@
   border-radius: 2rem;
 }
 
-.Home .profile-card img {
+.Home .profile-pic {
   width: 250px;
   height: 250px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.Home .region-img {
+  width: 50px;
+  height: 50px;
   object-fit: cover;
   object-position: center;
 }
