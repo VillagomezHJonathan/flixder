@@ -49,7 +49,7 @@
 
 ### **_Credits_**
 
-#### Movie Api: [TMDB](https://developers.themoviedb.org/3/getting-started/introduction)
+#### Movie API: [TMDB](https://developers.themoviedb.org/3/getting-started/introduction)
 
 #### Images: [Unsplash](https://unsplash.com/)
 
