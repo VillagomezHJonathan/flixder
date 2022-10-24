@@ -1,8 +1,15 @@
 import './ProfileCard.css'
+import { Link, useNavigate } from 'react-router-dom'
 import GenreCard from './GenreCard'
 import ProviderCard from './ProviderCard'
 
 const ProfileCard = (props) => {
+  let navigate = useNavigate()
+
+  const goToCurrentProfile = () => {
+    navigate(`/profiles/${props.profile._id}`)
+  }
+
   return (
     <div className="ProfileCard">
       <img
@@ -38,6 +45,12 @@ const ProfileCard = (props) => {
             ))}
         </div>
       </div>
+
+      {props.isInProfile ? (
+        <Link to={`/profiles/${props.profile._id}/edit`}>Edit</Link>
+      ) : (
+        <Link to={`/profiles/${props.profile._id}`}>View Profile</Link>
+      )}
     </div>
   )
 }
