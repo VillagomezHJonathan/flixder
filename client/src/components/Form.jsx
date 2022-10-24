@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
 const Form = (props) => {
-  const [currentProfile, setCurrentProfile] = useState({})
   const [regions, setRegions] = useState([])
   const [providers, setProviders] = useState([])
   const [images, setImages] = useState([])
@@ -29,6 +28,7 @@ const Form = (props) => {
     )
 
     setReqBody({
+      ...reqBody,
       name: '',
       profile_pic: '',
       region: '6352c64f9879eee933e71121',
@@ -63,6 +63,20 @@ const Form = (props) => {
     }
   }
 
+  const handleDelete = async () => {
+    setReqBody({
+      ...reqBody,
+      name: '',
+      profile_pic: '',
+      region: '6352c64f9879eee933e71121',
+      providers: [],
+      fav_genre_ids: [],
+      fav_movie_ids: []
+    })
+    props.updateCurrentProfile('6354e306131e244d9d270a65', true)
+    await axios.delete(`http://localhost:3001/profiles/${id}`)
+  }
+
   useEffect(() => {
     const getData = async () => {
       const regionsRes = await axios.get('http://localhost:3001/regions')
@@ -78,7 +92,15 @@ const Form = (props) => {
 
     const getCurrentProfile = async () => {
       const res = await axios.get(`http://localhost:3001/profiles/${id}`)
-      setCurrentProfile(res.data.profile)
+      const profile = res.data.profile
+
+      setReqBody({
+        name: `${profile.name}`,
+        profile_pic: `${profile.profile_pic}`,
+        region: `${profile.region._id}`,
+        providers: [...profile.providers],
+        fav_genre_ids: [...profile.fav_genre_ids]
+      })
     }
 
     if (props.editMode) {
@@ -86,7 +108,7 @@ const Form = (props) => {
     }
 
     getData()
-  }, [reqBody])
+  }, [])
 
   return (
     <div className="Form">
@@ -174,8 +196,15 @@ const Form = (props) => {
             </div>
           ))}
         </div>
-        <button type="submit">Create</button>
+
+        {props.editMode ? (
+          <button type="submit">Edit</button>
+        ) : (
+          <button type="submit">Create</button>
+        )}
       </form>
+
+      {props.editMode && <button onClick={handleDelete}>Delete Profile</button>}
     </div>
   )
 }

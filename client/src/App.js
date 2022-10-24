@@ -18,7 +18,7 @@ function App() {
   const updateCurrentProfile = (id, redirect) => {
     setCurrentProfileId(id)
     if (redirect) {
-      navigate(`/profiles/${id}`)
+      navigate(`/`)
     }
   }
 
