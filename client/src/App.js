@@ -4,6 +4,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import NavBar from './components/routes/NavBar'
 import Profile from './components/routes/Profile'
+import EditProfile from './components/routes/EditProfile'
 import Home from './components/routes/Home'
 import NewProfile from './components/routes/NewProfile'
 
@@ -46,6 +47,13 @@ function App() {
           <Route
             path="/profiles/:id"
             element={<Profile currentProfile={currentProfile} />}
+          />
+
+          <Route
+            path="/profiles/:id/edit"
+            element={
+              <EditProfile updateCurrentProfile={updateCurrentProfile} />
+            }
           />
 
           <Route

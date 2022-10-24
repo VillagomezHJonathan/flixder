@@ -1,8 +1,10 @@
 import './Form.css'
 import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
 const Form = (props) => {
+  const [currentProfile, setCurrentProfile] = useState({})
   const [regions, setRegions] = useState([])
   const [providers, setProviders] = useState([])
   const [images, setImages] = useState([])
@@ -15,6 +17,8 @@ const Form = (props) => {
     fav_genre_ids: [],
     fav_movie_ids: []
   })
+
+  const { id } = useParams()
 
   const handleSubmit = async (evt) => {
     evt.preventDefault()
@@ -72,8 +76,18 @@ const Form = (props) => {
       setGenres(genresRes.data.genres)
     }
 
+    const getCurrentProfile = async () => {
+      const res = await axios.get(`http://localhost:3001/profiles/${id}`)
+      setCurrentProfile(res.data.profile)
+    }
+
+    if (props.editMode) {
+      getCurrentProfile()
+    }
+
     getData()
   }, [reqBody])
+
   return (
     <div className="Form">
       <form onSubmit={(evt) => handleSubmit(evt)}>
