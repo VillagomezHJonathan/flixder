@@ -35,7 +35,7 @@ const NavBar = (props) => {
         >
           {profiles.map(
             (profile) =>
-              profile._id === props.currentProfileId && (
+              profile._id === props.currentProfileId.id && (
                 <img
                   key={profile._id}
                   src={profile.profile_pic}
@@ -48,7 +48,7 @@ const NavBar = (props) => {
         <div className="drop-down">
           {profiles.map(
             (profile) =>
-              profile._id !== props.currentProfileId && (
+              profile._id !== props.currentProfileId.id && (
                 <div
                   key={profile._id}
                   className="profile"
@@ -69,7 +69,7 @@ const NavBar = (props) => {
           <Link
             onClick={toggleDropDown}
             className="link"
-            to={`/profiles/${props.currentProfileId}`}
+            to={`/profiles/${props.currentProfileId.id}`}
           >
             View Profile
           </Link>

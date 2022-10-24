@@ -22,10 +22,21 @@ const Form = (props) => {
   const handleSubmit = async (evt) => {
     evt.preventDefault()
 
-    const newProfile = await axios.post(
-      'http://localhost:3001/profiles',
-      reqBody
-    )
+    if (props.editMode) {
+      const res = await axios.put(
+        `http://localhost:3001/profiles/${id}`,
+        reqBody
+      )
+
+      props.updateCurrentProfile(res.data.updatedProfile._id, true)
+    } else {
+      const newProfile = await axios.post(
+        'http://localhost:3001/profiles',
+        reqBody
+      )
+
+      props.updateCurrentProfile(newProfile.data._id, true)
+    }
 
     setReqBody({
       ...reqBody,
@@ -36,8 +47,6 @@ const Form = (props) => {
       fav_genre_ids: [],
       fav_movie_ids: []
     })
-
-    props.updateCurrentProfile(newProfile.data._id, true)
   }
 
   const handleChange = (evt, reqKey) => {
@@ -73,8 +82,10 @@ const Form = (props) => {
       fav_genre_ids: [],
       fav_movie_ids: []
     })
-    props.updateCurrentProfile('6354e306131e244d9d270a65', true)
+
     await axios.delete(`http://localhost:3001/profiles/${id}`)
+
+    props.updateCurrentProfile('6354e306131e244d9d270a65', true)
   }
 
   useEffect(() => {

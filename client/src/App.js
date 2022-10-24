@@ -10,13 +10,14 @@ import NewProfile from './components/routes/NewProfile'
 
 function App() {
   const [currentProfile, setCurrentProfile] = useState({})
-  const [currentProfileId, setCurrentProfileId] = useState(
-    '6354e306131e244d9d270a65'
-  )
+  const [currentProfileId, setCurrentProfileId] = useState({
+    id: '6354e306131e244d9d270a65'
+  })
   let navigate = useNavigate()
 
   const updateCurrentProfile = (id, redirect) => {
-    setCurrentProfileId(id)
+    setCurrentProfileId({ ...currentProfileId, id })
+
     if (redirect) {
       navigate(`/`)
     }
@@ -25,7 +26,7 @@ function App() {
   useEffect(() => {
     const getProfile = async () => {
       const res = await axios.get(
-        `http://localhost:3001/profiles/${currentProfileId}`
+        `http://localhost:3001/profiles/${currentProfileId.id}`
       )
 
       setCurrentProfile(res.data.profile)

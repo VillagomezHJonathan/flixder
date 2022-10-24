@@ -1,15 +1,9 @@
 import './ProfileCard.css'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import GenreCard from './GenreCard'
 import ProviderCard from './ProviderCard'
 
 const ProfileCard = (props) => {
-  let navigate = useNavigate()
-
-  const goToCurrentProfile = () => {
-    navigate(`/profiles/${props.profile._id}`)
-  }
-
   return (
     <div className="ProfileCard">
       <img
