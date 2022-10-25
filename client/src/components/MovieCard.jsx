@@ -1,8 +1,11 @@
 import './MovieCard.css'
+import { useState, useEffect } from 'react'
 import { IMAGE_BASE_PATH } from '../globals'
 import axios from 'axios'
 
 const MovieCard = (props) => {
+  const [ourMovies, setOurMovies] = useState([])
+
   const removeMovieCard = (evt) => {
     const movieCard = evt.currentTarget.parentNode.parentNode
     movieCard.remove()
@@ -19,6 +22,16 @@ const MovieCard = (props) => {
     })
 
     return arr
+  }
+
+  const getOurMovie = () => {
+    for (let ourMovie of ourMovies) {
+      if (ourMovie.tmdb_id === props.movie.id) {
+        return ourMovie._id
+      }
+    }
+
+    return null
   }
 
   const handleNo = (evt) => {
@@ -38,17 +51,34 @@ const MovieCard = (props) => {
       genre_ids: [...populateGenres()]
     }
 
-    const res = await axios.post('http://localhost:3001/movies', newMovie)
+    if (getOurMovie()) {
+      const updateProfile = await axios.put(
+        `http://localhost:3001/profiles/${props.profile._id}`,
+        { fav_movie_ids: [...props.profile.fav_movie_ids, getOurMovie()] }
+      )
+    } else {
+      const res = await axios.post('http://localhost:3001/movies', newMovie)
 
-    const updateProfile = await axios.put(
-      `http://localhost:3001/profiles/${props.profile._id}`,
-      { fav_movie_ids: [...props.profile.fav_movie_ids, res.data._id] }
-    )
+      const newMoviesArr = props.profile.fav_movie_ids
 
-    console.log(updateProfile)
+      const updateProfile = await axios.put(
+        `http://localhost:3001/profiles/${props.profile._id}`,
+        { fav_movie_ids: [...props.profile.fav_movie_ids, res.data._id] }
+      )
+    }
 
     // removeMovieCard(evt)
   }
+
+  useEffect(() => {
+    const getOurMovies = async () => {
+      const res = await axios.get(`http://localhost:3001/movies`)
+
+      setOurMovies(res.data.movies)
+    }
+
+    getOurMovies()
+  }, [])
 
   return (
     <div className="MovieCard">
