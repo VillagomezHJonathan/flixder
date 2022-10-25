@@ -6,6 +6,7 @@ import { DOMAIN } from '../globals'
 
 const MovieStack = () => {
   const [movies, setMovies] = useState([])
+  const [genres, setGenres] = useState([])
 
   useEffect(() => {
     const getMovies = async () => {
@@ -16,6 +17,13 @@ const MovieStack = () => {
       setMovies(res.data.results)
     }
 
+    const getGenres = async () => {
+      const res = await axios.get(`http://localhost:3001/genres`)
+
+      setGenres(res.data.genres)
+    }
+
+    getGenres()
     getMovies()
   }, [])
 
@@ -23,7 +31,7 @@ const MovieStack = () => {
     <div className="MovieStack">
       <h1>Movie Stack</h1>
       {movies.map((movie) => (
-        <MovieCard key={movie.id} movie={movie} />
+        <MovieCard key={movie.id} genres={genres} movie={movie} />
       ))}
     </div>
   )
