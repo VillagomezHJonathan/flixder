@@ -1,5 +1,6 @@
 import './MovieCard.css'
 import { IMAGE_BASE_PATH } from '../globals'
+import axios from 'axios'
 
 const MovieCard = (props) => {
   const removeMovieCard = (evt) => {
@@ -37,7 +38,14 @@ const MovieCard = (props) => {
       genre_ids: [...populateGenres()]
     }
 
-    console.log(props.movie)
+    const res = await axios.post('http://localhost:3001/movies', newMovie)
+
+    const updateProfile = await axios.put(
+      `http://localhost:3001/profiles/${props.profile._id}`,
+      { fav_movie_ids: [...props.profile.fav_movie_ids, res.data._id] }
+    )
+
+    console.log(updateProfile)
 
     // removeMovieCard(evt)
   }

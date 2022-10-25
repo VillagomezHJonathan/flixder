@@ -10,7 +10,7 @@ const Home = (props) => {
         onClick={props.goToCurrentProfile}
       />
 
-      <MovieStack />
+      <MovieStack profile={props.currentProfile} />
     </div>
   )
 }
