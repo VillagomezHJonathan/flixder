@@ -1,5 +1,6 @@
 import './Home.css'
 import ProfileCard from '../ProfileCard'
+import MovieStack from '../MovieStack'
 
 const Home = (props) => {
   return (
@@ -8,6 +9,8 @@ const Home = (props) => {
         profile={props.currentProfile}
         onClick={props.goToCurrentProfile}
       />
+
+      <MovieStack />
     </div>
   )
 }

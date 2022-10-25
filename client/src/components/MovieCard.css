@@ -1,0 +1,9 @@
+.MovieCard {
+  max-width: 500px;
+  background-color: grey;
+  border: 1px solid black;
+}
+
+.MovieCard img {
+  width: 250px;
+}
