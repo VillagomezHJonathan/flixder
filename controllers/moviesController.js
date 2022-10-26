@@ -23,6 +23,17 @@ const getMovieById = async (req, res) => {
   }
 }
 
+const getMovieByTmdbId = async (req, res) => {
+  try {
+    const { id } = req.params
+    const movie = await Movie.findOne({ tmdb_id: id })
+
+    return res.status(201).json({ movie })
+  } catch (err) {
+    return res.status(500).json({ error: err.message })
+  }
+}
+
 const createMovie = async (req, res) => {
   try {
     const newMovie = await Movie.create(req.body)
@@ -36,5 +47,6 @@ const createMovie = async (req, res) => {
 module.exports = {
   getAllMovies,
   getMovieById,
+  getMovieByTmdbId,
   createMovie
 }

@@ -7,4 +7,6 @@ router.post('/', controller.createMovie)
 
 router.get('/:id', controller.getMovieById)
 
+router.get('/tmdb/:id', controller.getMovieByTmdbId)
+
 module.exports = router

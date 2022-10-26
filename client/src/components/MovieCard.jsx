@@ -1,10 +1,10 @@
 import './MovieCard.css'
 import { useState, useEffect } from 'react'
-import { IMAGE_BASE_PATH } from '../globals'
 import axios from 'axios'
+import { IMAGE_BASE_PATH } from '../globals'
 
 const MovieCard = (props) => {
-  const [ourMovies, setOurMovies] = useState([])
+  const [ourMovie, setOurMovie] = useState(null)
 
   const removeMovieCard = (evt) => {
     const movieCard = evt.currentTarget.parentNode.parentNode
@@ -24,60 +24,49 @@ const MovieCard = (props) => {
     return arr
   }
 
-  const getOurMovie = () => {
-    for (let ourMovie of ourMovies) {
-      if (ourMovie.tmdb_id === props.movie.id) {
-        return ourMovie._id
-      }
-    }
+  const getOurMovie = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:3001/movies/tmdb/${props.movie.id}`
+      )
 
-    return null
+      setOurMovie(res.data.movie)
+    } catch (err) {
+      setOurMovie(null)
+    }
   }
 
   const handleNo = (evt) => {
     // removeMovieCard(evt)
   }
 
-  const handleYes = async (evt) => {
-    const newMovie = {
-      tmdb_id: props.movie.id,
-      poster_path: props.movie.poster_path,
-      backdrop_path: props.movie.backdrop_path,
-      title: props.movie.title,
-      release_date: props.movie.release_date,
-      overview: props.movie.overview,
-      vote_average: props.movie.vote_average,
-      vote_count: props.movie.vote_count,
-      genre_ids: [...populateGenres()]
-    }
+  const handleYes = async () => {
+    getOurMovie()
 
-    if (getOurMovie()) {
-      const updateProfile = await axios.put(
-        `http://localhost:3001/profiles/${props.profile._id}`,
-        { fav_movie_ids: [...props.profile.fav_movie_ids, getOurMovie()] }
-      )
+    if (ourMovie !== null) {
+      console.log('in our db')
     } else {
-      const res = await axios.post('http://localhost:3001/movies', newMovie)
+      const newMovie = {
+        tmdb_id: props.movie.id,
+        poster_path: props.movie.poster_path,
+        backdrop_path: props.movie.backdrop_path,
+        title: props.movie.title,
+        release_date: props.movie.release_date,
+        overview: props.movie.overview,
+        vote_average: props.movie.vote_average,
+        vote_count: props.movie.vote_count,
+        genre_ids: [...populateGenres()]
+      }
 
-      const newMoviesArr = props.profile.fav_movie_ids
+      const movie = await axios.post('http://localhost:3001/movies', newMovie)
 
-      const updateProfile = await axios.put(
-        `http://localhost:3001/profiles/${props.profile._id}`,
-        { fav_movie_ids: [...props.profile.fav_movie_ids, res.data._id] }
-      )
+      setOurMovie(movie.data)
     }
-
     // removeMovieCard(evt)
   }
 
   useEffect(() => {
-    const getOurMovies = async () => {
-      const res = await axios.get(`http://localhost:3001/movies`)
-
-      setOurMovies(res.data.movies)
-    }
-
-    getOurMovies()
+    getOurMovie()
   }, [])
 
   return (
