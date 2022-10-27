@@ -39,14 +39,17 @@ const MovieStack = (props) => {
   return (
     <div className="MovieStack">
       <h1>Movie Stack</h1>
-      {movies.map((movie) => (
-        <MovieCard
-          key={movie.id}
-          profile={props.profile}
-          genres={genres}
-          movie={movie}
-        />
-      ))}
+      <div className="movies">
+        {movies.map((movie) => (
+          <MovieCard
+            key={movie.id}
+            profile={props.profile}
+            genres={genres}
+            movie={movie}
+            addMode={true}
+          />
+        ))}
+      </div>
     </div>
   )
 }

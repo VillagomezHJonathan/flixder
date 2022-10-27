@@ -23,15 +23,15 @@ function App() {
     }
   }
 
+  const getProfile = async () => {
+    const res = await axios.get(
+      `http://localhost:3001/profiles/${currentProfileId.id}`
+    )
+
+    setCurrentProfile(res.data.profile)
+  }
+
   useEffect(() => {
-    const getProfile = async () => {
-      const res = await axios.get(
-        `http://localhost:3001/profiles/${currentProfileId.id}`
-      )
-
-      setCurrentProfile(res.data.profile)
-    }
-
     getProfile()
   }, [currentProfileId])
 
@@ -43,11 +43,24 @@ function App() {
       />
       <main>
         <Routes>
-          <Route path="/" element={<Home currentProfile={currentProfile} />} />
+          <Route
+            path="/"
+            element={
+              <Home
+                currentProfile={currentProfile}
+                currentProfileId={currentProfileId}
+              />
+            }
+          />
 
           <Route
             path="/profiles/:id"
-            element={<Profile currentProfile={currentProfile} />}
+            element={
+              <Profile
+                currentProfile={currentProfile}
+                updateCurrentProfile={getProfile}
+              />
+            }
           />
 
           <Route

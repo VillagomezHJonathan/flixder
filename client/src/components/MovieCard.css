@@ -1,9 +1,30 @@
 .MovieCard {
-  max-width: 500px;
+  width: 600px;
+  height: 1100px;
+  padding: 2rem;
+  margin: 1rem;
+  border-radius: 2rem;
   background-color: grey;
   border: 1px solid black;
 }
 
 .MovieCard img {
-  width: 250px;
+  width: 100%;
+  border-radius: 1rem;
+}
+
+.MovieCard h2 {
+  padding: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.MovieCard .rating {
+  padding: 0.5rem;
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+}
+
+.MovieCard .inputs {
+  margin-top: 2rem;
 }

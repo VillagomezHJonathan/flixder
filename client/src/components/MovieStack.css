@@ -1,0 +1,9 @@
+.MovieStack .movies {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.MovieStack .MovieCard {
+  position: absolute;
+}

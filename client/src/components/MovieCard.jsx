@@ -37,14 +37,21 @@ const MovieCard = (props) => {
   }
 
   const handleNo = (evt) => {
-    // removeMovieCard(evt)
+    removeMovieCard(evt)
   }
 
-  const handleYes = async () => {
+  const handleYes = async (evt) => {
+    removeMovieCard(evt)
     getOurMovie()
 
+    const newMovieArr = props.profile.fav_movie_ids
+
     if (ourMovie !== null) {
-      console.log('in our db')
+      newMovieArr.push(ourMovie._id)
+      await axios.put(`http://localhost:3001/profiles/${props.profile._id}`, {
+        ...props.profile,
+        fav_movie_ids: newMovieArr
+      })
     } else {
       const newMovie = {
         tmdb_id: props.movie.id,
@@ -59,14 +66,20 @@ const MovieCard = (props) => {
       }
 
       const movie = await axios.post('http://localhost:3001/movies', newMovie)
-
       setOurMovie(movie.data)
+
+      newMovieArr.push(movie.data._id)
+      await axios.put(`http://localhost:3001/profiles/${props.profile._id}`, {
+        ...props.profile,
+        fav_movie_ids: newMovieArr
+      })
     }
-    // removeMovieCard(evt)
   }
 
   useEffect(() => {
-    getOurMovie()
+    if (props.addMode) {
+      getOurMovie()
+    }
   }, [])
 
   return (
@@ -76,17 +89,24 @@ const MovieCard = (props) => {
         alt={props.movie.title}
       />
       <div className="movie-info">
-        <h2>{props.movie.title}</h2>
+        <h2>
+          {props.movie.title}{' '}
+          <span className="rating">{props.movie.vote_average}</span>
+        </h2>
+
+        <p className="overview">{props.movie.overview}</p>
       </div>
 
-      <div className="inputs">
-        <button className="no-btn" onClick={(evt) => handleNo(evt)}>
-          No
-        </button>
-        <button className="yes-btn" onClick={(evt) => handleYes(evt)}>
-          Yes
-        </button>
-      </div>
+      {props.addMode && (
+        <div className="inputs">
+          <button className="no-btn" onClick={(evt) => handleNo(evt)}>
+            No
+          </button>
+          <button className="yes-btn" onClick={(evt) => handleYes(evt)}>
+            Yes
+          </button>
+        </div>
+      )}
     </div>
   )
 }

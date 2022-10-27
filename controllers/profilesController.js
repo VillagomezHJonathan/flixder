@@ -19,6 +19,7 @@ const getProfileById = async (req, res) => {
       .populate('region')
       .populate('providers')
       .populate('fav_genre_ids')
+      .populate('fav_movie_ids')
 
     return res.status(201).json({ profile })
   } catch (err) {
