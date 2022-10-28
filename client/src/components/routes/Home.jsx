@@ -7,7 +7,7 @@ const Home = (props) => {
     <div className="Home">
       <ProfileCard profile={props.currentProfile} />
 
-      <MovieStack profile={props.currentProfile} />
+      <MovieStack profile={props.currentProfile} movies={props.movies} />
     </div>
   )
 }
