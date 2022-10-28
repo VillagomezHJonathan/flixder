@@ -133,7 +133,7 @@ const Form = (props) => {
                 type="radio"
                 id={image._id}
                 name="profile_pic"
-                value={reqBody.profile_pic}
+                value={image.url}
                 onChange={(evt) => handleChange(evt, 'profile_pic')}
               />
               <label htmlFor={image._id}>

@@ -2,13 +2,14 @@ import './App.css'
 import { useState, useEffect } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import NavBar from './components/routes/NavBar'
+import NavBar from './components/NavBar'
 import Profile from './components/routes/Profile'
 import EditProfile from './components/routes/EditProfile'
 import Home from './components/routes/Home'
 import NewProfile from './components/routes/NewProfile'
+import Footer from './components/Footer'
 
-function App() {
+const App = () => {
   const [currentProfile, setCurrentProfile] = useState({})
   const [currentProfileId, setCurrentProfileId] = useState({
     id: '6354e306131e244d9d270a65'
@@ -76,6 +77,8 @@ function App() {
           />
         </Routes>
       </main>
+
+      <Footer />
     </div>
   )
 }

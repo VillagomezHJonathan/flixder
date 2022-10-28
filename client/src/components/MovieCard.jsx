@@ -89,10 +89,10 @@ const MovieCard = (props) => {
         alt={props.movie.title}
       />
       <div className="movie-info">
-        <h2>
-          {props.movie.title}{' '}
-          <span className="rating">{props.movie.vote_average}</span>
-        </h2>
+        <div className="movie-heading">
+          <h2>{props.movie.title}</h2>
+          <p className="rating">⭐ {props.movie.vote_average}</p>
+        </div>
 
         <p className="overview">{props.movie.overview}</p>
       </div>

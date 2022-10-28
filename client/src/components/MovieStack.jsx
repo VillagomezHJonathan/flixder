@@ -38,7 +38,6 @@ const MovieStack = (props) => {
 
   return (
     <div className="MovieStack">
-      <h1>Movie Stack</h1>
       <div className="movies">
         {movies.map((movie) => (
           <MovieCard

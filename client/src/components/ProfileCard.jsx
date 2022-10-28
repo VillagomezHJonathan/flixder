@@ -6,25 +6,35 @@ import ProviderCard from './ProviderCard'
 const ProfileCard = (props) => {
   return (
     <div className="ProfileCard">
-      <img
-        className="profile-pic"
-        src={props.profile.profile_pic}
-        alt={`${props.profile.name} profile`}
-      />
+      <div className="profile-header">
+        <img
+          className="profile-pic"
+          src={props.profile.profile_pic}
+          alt={`${props.profile.name} profile`}
+        />
 
-      <div className="profile-info">
         <h2>{props.profile.name}</h2>
 
-        <div className="region">
-          {props.profile.region && (
-            <img
-              className="region-img"
-              src={props.profile.region.flag_image}
-              alt={props.profile.region.name}
-            />
-          )}
-        </div>
+        {props.profile.region && (
+          <img
+            className="region-img"
+            src={props.profile.region.flag_image}
+            alt={props.profile.region.name}
+          />
+        )}
 
+        {props.isInProfile ? (
+          <Link className="link" to={`/profiles/${props.profile._id}/edit`}>
+            Edit
+          </Link>
+        ) : (
+          <Link className="link" to={`/profiles/${props.profile._id}`}>
+            View Profile
+          </Link>
+        )}
+      </div>
+
+      <div className="profile-info">
         <div className="fav-genres">
           {props.profile.fav_genre_ids &&
             props.profile.fav_genre_ids.map((genre) => (
@@ -39,12 +49,6 @@ const ProfileCard = (props) => {
             ))}
         </div>
       </div>
-
-      {props.isInProfile ? (
-        <Link to={`/profiles/${props.profile._id}/edit`}>Edit</Link>
-      ) : (
-        <Link to={`/profiles/${props.profile._id}`}>View Profile</Link>
-      )}
     </div>
   )
 }
