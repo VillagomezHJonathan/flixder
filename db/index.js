@@ -9,12 +9,12 @@ let dbUrl =
 mongoose
   .connect(dbUrl)
   .then(() => {
-    console.log('Successfully connected to the database')
+    console.log('Successfully connected to MongoDB!')
   })
-  .catch((err) => {
-    console.error('Error connecting', err.message)
+  .catch((e) => {
+    console.error('Connection error', e.message)
   })
-
+mongoose.set('debug', true)
 const db = mongoose.connection
 
 module.exports = db
