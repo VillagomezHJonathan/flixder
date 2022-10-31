@@ -99,10 +99,10 @@ const MovieCard = (props) => {
 
       {props.addMode && (
         <div className="inputs">
-          <button className="no-btn" onClick={(evt) => handleNo(evt)}>
+          <button className="btn danger" onClick={(evt) => handleNo(evt)}>
             No
           </button>
-          <button className="yes-btn" onClick={(evt) => handleYes(evt)}>
+          <button className="btn success" onClick={(evt) => handleYes(evt)}>
             Yes
           </button>
         </div>

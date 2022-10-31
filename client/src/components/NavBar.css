@@ -23,6 +23,7 @@
 
 .NavBar .drop-down.show .link {
   font-size: initial;
+  margin-top: 0.5rem;
 }
 
 .NavBar .drop-down.show .profile,

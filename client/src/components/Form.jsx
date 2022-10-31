@@ -125,97 +125,115 @@ const Form = (props) => {
     <div className="Form">
       <form onSubmit={(evt) => handleSubmit(evt)}>
         <div>
-          <h2>Choose A Profile Pic</h2>
+          <h2 className="pics-heading">Choose A Profile Pic</h2>
 
-          {images.map((image) => (
-            <div key={image._id}>
-              <input
-                type="radio"
-                id={image._id}
-                name="profile_pic"
-                value={image.url}
-                onChange={(evt) => handleChange(evt, 'profile_pic')}
-              />
-              <label htmlFor={image._id}>
-                <img
-                  className="profile-pic"
-                  src={image.url}
-                  alt={`${image.title}`}
+          <div className="pics">
+            {images.map((image) => (
+              <div key={image._id}>
+                <input
+                  type="radio"
+                  id={image._id}
+                  name="profile_pic"
+                  value={image.url}
+                  onChange={(evt) => handleChange(evt, 'profile_pic')}
                 />
-              </label>
-            </div>
-          ))}
+                <label htmlFor={image._id}>
+                  <img
+                    className="profile-pic"
+                    src={image.url}
+                    alt={`${image.title}`}
+                  />
+                </label>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <label htmlFor="name">Name</label>
-        <input
-          onChange={(evt) => handleChange(evt)}
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Profile name"
-          value={reqBody.name}
-          required
-        />
+        <div className="body">
+          <div className="main">
+            <label htmlFor="name">Name</label>
+            <input
+              onChange={(evt) => handleChange(evt)}
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Profile name"
+              value={reqBody.name}
+              required
+            />
 
-        <label htmlFor="region">Choose a region:</label>
-        <select
-          onChange={(evt) => handleChange(evt)}
-          name="region"
-          id="region"
-          value={reqBody.region}
-          required
-        >
-          <option value="default" disabled>
-            Choose your region
-          </option>
-          {regions.map((region) => (
-            <option key={region._id} value={region._id}>
-              {region.name}
-            </option>
-          ))}
-        </select>
+            <label htmlFor="region">Choose a region:</label>
+            <select
+              onChange={(evt) => handleChange(evt)}
+              name="region"
+              id="region"
+              value={reqBody.region}
+              required
+            >
+              <option value="default" disabled>
+                Choose your region
+              </option>
+              {regions.map((region) => (
+                <option key={region._id} value={region._id}>
+                  {region.name}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <div>
-          <h2>Watch Providers</h2>
-          {providers.map((provider) => (
-            <div key={provider._id}>
-              <input
-                type="checkbox"
-                id={provider._id}
-                name={provider._id}
-                onChange={(evt) => handleCheckbox(evt, 'providers')}
-              />
+          <div className="providers">
+            <h2>Watch Providers</h2>
 
-              <label htmlFor={provider._id}>{provider.provider_name}</label>
+            {providers.map((provider) => (
+              <div key={provider._id}>
+                <input
+                  type="checkbox"
+                  id={provider._id}
+                  name={provider._id}
+                  onChange={(evt) => handleCheckbox(evt, 'providers')}
+                />
+
+                <label htmlFor={provider._id}>{provider.provider_name}</label>
+              </div>
+            ))}
+          </div>
+
+          <div>
+            <h2>Favorite Genres</h2>
+
+            <div className="genres">
+              {genres.map((genre) => (
+                <div key={genre._id}>
+                  <input
+                    type="checkbox"
+                    id={genre._id}
+                    name={genre._id}
+                    onChange={(evt) => handleCheckbox(evt, 'fav_genre_ids')}
+                  />
+
+                  <label htmlFor={genre._id}>{genre.name}</label>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          {props.editMode ? (
+            <button className="btn" type="submit">
+              Edit
+            </button>
+          ) : (
+            <button className="btn" type="submit">
+              Create
+            </button>
+          )}
         </div>
-
-        <div>
-          <h2>Favorite Genres</h2>
-          {genres.map((genre) => (
-            <div key={genre._id}>
-              <input
-                type="checkbox"
-                id={genre._id}
-                name={genre._id}
-                onChange={(evt) => handleCheckbox(evt, 'fav_genre_ids')}
-              />
-
-              <label htmlFor={genre._id}>{genre.name}</label>
-            </div>
-          ))}
-        </div>
-
-        {props.editMode ? (
-          <button type="submit">Edit</button>
-        ) : (
-          <button type="submit">Create</button>
-        )}
       </form>
 
-      {props.editMode && <button onClick={handleDelete}>Delete Profile</button>}
+      {props.editMode && (
+        <button className="btn danger" onClick={handleDelete}>
+          Delete Profile
+        </button>
+      )}
     </div>
   )
 }

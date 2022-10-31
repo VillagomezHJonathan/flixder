@@ -110,7 +110,10 @@ const App = () => {
           <Route
             path="/profiles/:id/edit"
             element={
-              <EditProfile updateCurrentProfile={updateCurrentProfile} />
+              <EditProfile
+                currentProfileId={currentProfileId}
+                updateCurrentProfile={updateCurrentProfile}
+              />
             }
           />
 

@@ -7,6 +7,28 @@ main {
   padding: 2rem;
 }
 
+h1 {
+  text-transform: uppercase;
+}
+
+.btn {
+  padding: 1rem 4rem;
+  border-radius: 1rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background-color: #08B2E3;
+}
+
+.btn.danger {
+  background-color: #EE6352;
+}
+
+.btn.success {
+  background-color: #57A773;
+}
+
 .link {
   display: block;
 }
+
