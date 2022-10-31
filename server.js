@@ -16,6 +16,7 @@ const app = express()
 
 app.use(cors())
 app.use(express.json())
+app.use(express.static(`${__dirname}/client/build`))
 
 app.use('/genres', genresRoutes)
 app.use('/regions', regionsRoutes)
@@ -23,6 +24,10 @@ app.use('/profiles', profilesRoutes)
 app.use('/movies', moviesRoutes)
 app.use('/images', imagesRoutes)
 app.use('/providers', providersRoutes)
+
+app.get('/*', (req, res) => {
+  res.sendFile(`${__dirname}/client/build/index.html`)
+})
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`)

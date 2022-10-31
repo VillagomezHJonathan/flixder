@@ -1,7 +1,13 @@
 const mongoose = require('mongoose')
+require('dotenv').config()
+
+let dbUrl =
+  process.env.NODE_ENV === 'production'
+    ? process.env.MONGODB_URI
+    : 'mongodb://127.0.0.1:27017/flixderDatabase'
 
 mongoose
-  .connect(`${process.env.MONGOOSE_URI}`)
+  .connect(dbUrl)
   .then(() => {
     console.log('Successfully connected to the database')
   })
