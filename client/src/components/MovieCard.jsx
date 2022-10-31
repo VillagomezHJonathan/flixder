@@ -7,7 +7,7 @@ const MovieCard = (props) => {
   const [ourMovie, setOurMovie] = useState(null)
 
   const removeMovieCard = (evt) => {
-    const movieCard = evt.currentTarget.parentNode.parentNode
+    const movieCard = evt.target.parentNode.parentNode
     movieCard.remove()
   }
 
