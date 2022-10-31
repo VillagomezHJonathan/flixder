@@ -39,6 +39,8 @@
 
 #### [Check out my Trello board!](https://trello.com/b/cdUTXF1p/flixder)
 
+#### [Check out the live site!](https://quiet-stream-59112.herokuapp.com/)
+
 #### Future Updates
 
 - [ ] Add accounts
