@@ -1,6 +1,7 @@
 import './MovieStack.css'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { DB_BASE_URL } from '../globals'
 import MovieCard from './MovieCard'
 
 const MovieStack = (props) => {
@@ -8,7 +9,7 @@ const MovieStack = (props) => {
 
   useEffect(() => {
     const getGenres = async () => {
-      const res = await axios.get(`http://localhost:3001/genres`)
+      const res = await axios.get(`${DB_BASE_URL}/genres`)
 
       setGenres(res.data.genres)
     }

@@ -2,6 +2,7 @@ import './NavBar.css'
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { DB_BASE_URL } from '../globals'
 
 const NavBar = (props) => {
   const [profiles, setProfiles] = useState([])
@@ -15,7 +16,7 @@ const NavBar = (props) => {
 
   useEffect(() => {
     const getProfiles = async () => {
-      const res = await axios.get('http://localhost:3001/profiles')
+      const res = await axios.get(`${DB_BASE_URL}/profiles`)
 
       setProfiles(res.data.profiles)
     }

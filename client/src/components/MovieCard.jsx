@@ -1,7 +1,7 @@
 import './MovieCard.css'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { IMAGE_BASE_PATH } from '../globals'
+import { IMAGE_BASE_PATH, DB_BASE_URL } from '../globals'
 
 const MovieCard = (props) => {
   const [ourMovie, setOurMovie] = useState(null)
@@ -27,7 +27,7 @@ const MovieCard = (props) => {
   const getOurMovie = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3001/movies/tmdb/${props.movie.id}`
+        `${DB_BASE_URL}/movies/tmdb/${props.movie.id}`
       )
 
       setOurMovie(res.data.movie)
@@ -48,7 +48,7 @@ const MovieCard = (props) => {
 
     if (ourMovie !== null) {
       newMovieArr.push(ourMovie._id)
-      await axios.put(`http://localhost:3001/profiles/${props.profile._id}`, {
+      await axios.put(`${DB_BASE_URL}/profiles/${props.profile._id}`, {
         ...props.profile,
         fav_movie_ids: newMovieArr
       })
@@ -65,11 +65,11 @@ const MovieCard = (props) => {
         genre_ids: [...populateGenres()]
       }
 
-      const movie = await axios.post('http://localhost:3001/movies', newMovie)
+      const movie = await axios.post(`${DB_BASE_URL}/movies`, newMovie)
       setOurMovie(movie.data)
 
       newMovieArr.push(movie.data._id)
-      await axios.put(`http://localhost:3001/profiles/${props.profile._id}`, {
+      await axios.put(`${DB_BASE_URL}/profiles/${props.profile._id}`, {
         ...props.profile,
         fav_movie_ids: newMovieArr
       })

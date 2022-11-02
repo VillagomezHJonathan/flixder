@@ -1,6 +1,7 @@
 import './Form.css'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { DB_BASE_URL } from '../globals'
 import axios from 'axios'
 
 const Form = (props) => {
@@ -23,17 +24,11 @@ const Form = (props) => {
     evt.preventDefault()
 
     if (props.editMode) {
-      const res = await axios.put(
-        `http://localhost:3001/profiles/${id}`,
-        reqBody
-      )
+      const res = await axios.put(`${DB_BASE_URL}/profiles/${id}`, reqBody)
 
       props.updateCurrentProfile(res.data.updatedProfile._id, true)
     } else {
-      const newProfile = await axios.post(
-        'http://localhost:3001/profiles',
-        reqBody
-      )
+      const newProfile = await axios.post(`${DB_BASE_URL}/profiles`, reqBody)
 
       props.updateCurrentProfile(newProfile.data._id, true)
     }
@@ -83,17 +78,17 @@ const Form = (props) => {
       fav_movie_ids: []
     })
 
-    await axios.delete(`http://localhost:3001/profiles/${id}`)
+    await axios.delete(`${DB_BASE_URL}/profiles/${id}`)
 
     props.updateCurrentProfile('6354e306131e244d9d270a65', true)
   }
 
   useEffect(() => {
     const getData = async () => {
-      const regionsRes = await axios.get('http://localhost:3001/regions')
-      const providersRes = await axios.get('http://localhost:3001/providers')
-      const imagesRes = await axios.get('http://localhost:3001/images')
-      const genresRes = await axios.get('http://localhost:3001/genres')
+      const regionsRes = await axios.get(`${DB_BASE_URL}/regions`)
+      const providersRes = await axios.get(`${DB_BASE_URL}/providers`)
+      const imagesRes = await axios.get(`${DB_BASE_URL}/images`)
+      const genresRes = await axios.get(`${DB_BASE_URL}/genres`)
 
       setRegions(regionsRes.data.regions)
       setProviders(providersRes.data.providers)
@@ -102,7 +97,7 @@ const Form = (props) => {
     }
 
     const getCurrentProfile = async () => {
-      const res = await axios.get(`http://localhost:3001/profiles/${id}`)
+      const res = await axios.get(`${DB_BASE_URL}/profiles/${id}`)
       const profile = res.data.profile
 
       setReqBody({

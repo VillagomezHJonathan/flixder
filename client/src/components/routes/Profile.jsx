@@ -2,7 +2,6 @@ import './Profile.css'
 import { useEffect } from 'react'
 import ProfileCard from '../ProfileCard'
 import MovieCard from '../MovieCard'
-import { Link } from 'react-router-dom'
 
 const Profile = (props) => {
   useEffect(() => {
