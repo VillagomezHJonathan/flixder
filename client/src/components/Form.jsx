@@ -11,11 +11,11 @@ const Form = (props) => {
   const [genres, setGenres] = useState([])
   const [reqBody, setReqBody] = useState({
     name: '',
-    profile_pic: '',
+    profile_pic: {},
     region: '6352c64f9879eee933e71121',
     providers: [],
-    fav_genre_ids: [],
-    fav_movie_ids: []
+    fav_genres: [],
+    fav_movies: []
   })
 
   const { id } = useParams()
@@ -36,11 +36,11 @@ const Form = (props) => {
     setReqBody({
       ...reqBody,
       name: '',
-      profile_pic: '',
+      profile_pic: {},
       region: '6352c64f9879eee933e71121',
       providers: [],
-      fav_genre_ids: [],
-      fav_movie_ids: []
+      fav_genres: [],
+      fav_movies: []
     })
   }
 
@@ -71,11 +71,11 @@ const Form = (props) => {
     setReqBody({
       ...reqBody,
       name: '',
-      profile_pic: '',
+      profile_pic: {},
       region: '6352c64f9879eee933e71121',
       providers: [],
-      fav_genre_ids: [],
-      fav_movie_ids: []
+      fav_genres: [],
+      fav_movies: []
     })
 
     await axios.delete(`${DB_BASE_URL}/profiles/${id}`)
@@ -102,10 +102,10 @@ const Form = (props) => {
 
       setReqBody({
         name: `${profile.name}`,
-        profile_pic: `${profile.profile_pic}`,
+        profile_pic: `${profile.profile_pic._id}`,
         region: `${profile.region._id}`,
         providers: [...profile.providers],
-        fav_genre_ids: [...profile.fav_genre_ids]
+        fav_genres: [...profile.fav_genres]
       })
     }
 
@@ -129,7 +129,7 @@ const Form = (props) => {
                   type="radio"
                   id={image._id}
                   name="profile_pic"
-                  value={image.url}
+                  value={image._id}
                   onChange={(evt) => handleChange(evt, 'profile_pic')}
                 />
                 <label htmlFor={image._id}>
@@ -203,7 +203,7 @@ const Form = (props) => {
                     type="checkbox"
                     id={genre._id}
                     name={genre._id}
-                    onChange={(evt) => handleCheckbox(evt, 'fav_genre_ids')}
+                    onChange={(evt) => handleCheckbox(evt, 'fav_genres')}
                   />
 
                   <label htmlFor={genre._id}>{genre.name}</label>

@@ -3,6 +3,11 @@ const { Profile } = require('../models')
 const getAllProfiles = async (req, res) => {
   try {
     const profiles = await Profile.find()
+      .populate('profile_pic')
+      .populate('region')
+      .populate('providers')
+      .populate('fav_genres')
+      .populate('fav_movies')
 
     return res.status(201).json({
       profiles
@@ -16,10 +21,11 @@ const getProfileById = async (req, res) => {
   try {
     const { id } = req.params
     const profile = await Profile.findOne({ _id: id })
+      .populate('profile_pic')
       .populate('region')
       .populate('providers')
-      .populate('fav_genre_ids')
-      .populate('fav_movie_ids')
+      .populate('fav_genres')
+      .populate('fav_movies')
 
     return res.status(201).json({ profile })
   } catch (err) {

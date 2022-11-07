@@ -44,13 +44,13 @@ const MovieCard = (props) => {
     removeMovieCard(evt)
     getOurMovie()
 
-    const newMovieArr = props.profile.fav_movie_ids
+    const newMovieArr = props.profile.fav_movies
 
     if (ourMovie !== null) {
       newMovieArr.push(ourMovie._id)
       await axios.put(`${DB_BASE_URL}/profiles/${props.profile._id}`, {
         ...props.profile,
-        fav_movie_ids: newMovieArr
+        fav_movies: newMovieArr
       })
     } else {
       const newMovie = {
@@ -71,7 +71,7 @@ const MovieCard = (props) => {
       newMovieArr.push(movie.data._id)
       await axios.put(`${DB_BASE_URL}/profiles/${props.profile._id}`, {
         ...props.profile,
-        fav_movie_ids: newMovieArr
+        fav_movies: newMovieArr
       })
     }
   }

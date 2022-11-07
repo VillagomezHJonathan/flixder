@@ -13,8 +13,8 @@ const Profile = (props) => {
       <ProfileCard profile={props.currentProfile} isInProfile={true} />
 
       <div className="movies">
-        {props.currentProfile.fav_movie_ids ? (
-          props.currentProfile.fav_movie_ids.map((movie) => (
+        {props.currentProfile.fav_movies ? (
+          props.currentProfile.fav_movies.map((movie) => (
             <MovieCard key={movie._id} movie={movie} addMode={false} />
           ))
         ) : (

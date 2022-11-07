@@ -7,11 +7,11 @@ const ProfileCard = (props) => {
   return (
     <div className="ProfileCard">
       <div className="profile-header">
-        <img
+        {/* <img
           className="profile-pic"
-          src={props.profile.profile_pic}
+          src={props.profile.profile_pic.url}
           alt={`${props.profile.name} profile`}
-        />
+        /> */}
 
         <h2>{props.profile.name}</h2>
 
@@ -36,8 +36,8 @@ const ProfileCard = (props) => {
 
       <div className="profile-info">
         <div className="fav-genres">
-          {props.profile.fav_genre_ids &&
-            props.profile.fav_genre_ids.map((genre) => (
+          {props.profile.fav_genres &&
+            props.profile.fav_genres.map((genre) => (
               <GenreCard key={genre._id} genre={genre} />
             ))}
         </div>
