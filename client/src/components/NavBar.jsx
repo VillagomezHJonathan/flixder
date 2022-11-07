@@ -39,7 +39,7 @@ const NavBar = (props) => {
               profile._id === props.currentProfileId.id && (
                 <img
                   key={profile._id}
-                  src={profile.profile_pic}
+                  src={profile.profile_pic.url}
                   alt={`${profile.name} profile`}
                 />
               )
@@ -60,7 +60,7 @@ const NavBar = (props) => {
                   }}
                 >
                   <img
-                    src={profile.profile_pic}
+                    src={profile.profile_pic.url}
                     alt={`${profile.name} profile`}
                   />
                 </div>

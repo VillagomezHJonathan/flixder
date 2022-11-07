@@ -14,7 +14,7 @@ const App = () => {
   const [currentProfile, setCurrentProfile] = useState({})
   const [movies, setMovies] = useState([])
   const [currentProfileId, setCurrentProfileId] = useState({
-    id: '6354e306131e244d9d270a65'
+    id: '6366edf6e56baa86a9cd2944'
   })
   let navigate = useNavigate()
 
@@ -61,7 +61,7 @@ const App = () => {
     setCurrentProfile(profile)
 
     const providers = formatToString(profile.providers, '|')
-    const genres = formatToString(pickRandomGenres(profile.fav_genre_ids), ',')
+    const genres = formatToString(pickRandomGenres(profile.fav_genres), ',')
 
     getMovies(profile.region.tmdb_iso, providers, genres)
   }
