@@ -7,12 +7,6 @@ const ProfileCard = (props) => {
   return (
     <div className="ProfileCard">
       <div className="profile-header">
-        <img
-          className="profile-pic"
-          src={props.profile.profile_pic.url}
-          alt={`${props.profile.name} profile`}
-        />
-
         <h2>{props.profile.name}</h2>
 
         {props.profile.region && (
